@@ -2,11 +2,12 @@ const express = require('express');
 
 function usersApi(app){
     const router = express.Router();
-    app.use("/api/users", router);
+    app.use("/api/friends", router);
 
     router.get("/", async function(req, res, next){
         try {
-            const friendsMocks = [
+            const friends = await Promise.resolve(
+                friendsMocks = [
                 {
                     id: 1,
                     name: "Camilo",
@@ -192,16 +193,95 @@ function usersApi(app){
                     img: "https://react.semantic-ui.com/images/avatar/large/matthew.png",
             
                 }
-            ];
+                ]
+            );
  
             res.status(200).json({
-                data: friendsMocks,
-                message:'users listed'
+                data: friends,
+                message:'friends listed'
             })
         } catch (error) {
             next(error);
         }
-    });
+    });// devuelve la lista de los amigos agregados
+
+    router.get("/:friendId", async function(req, res, next){
+        try {
+            const friendId = await Promise.resolve(
+                friendsMocks = [
+                {
+                    id: 1,
+                    name: "Camilo",
+                    position: "Del",
+                    added: false,
+                    eFisico: "Bueno",
+                    pieDer: 3,
+                    pieIzq:2,
+                    img: "https://react.semantic-ui.com/images/avatar/large/matthew.png",
+                },
+                ]
+            );
+ 
+            res.status(200).json({
+                data: friendId,
+                message:'friend retrieved'
+            })
+        } catch (error) {
+            next(error);
+        }
+    });// devuelve un amigo buscado para agregarlo
+
+    router.post("/", async function(req, res, next){
+        try {
+            const sendFriendRequestId = await Promise.resolve(
+                friendsMocks = [
+                {
+                    id: 1,
+                    name: "Camilo",
+                    position: "Del",
+                    added: false,
+                    eFisico: "Bueno",
+                    pieDer: 3,
+                    pieIzq:2,
+                    img: "https://react.semantic-ui.com/images/avatar/large/matthew.png",
+                },
+                ]
+            );
+ 
+            res.status(201).json({
+                data: sendFriendRequestId,
+                message:'invitation send'
+            })
+        } catch (error) {
+            next(error);
+        }
+    });// devuelve un amigo al que le hemos enviado la solicitud de amistad
+
+    router.delete("/:friendId", async function(req, res, next){
+        try {
+            const deletedFriendId = await Promise.resolve(
+                friendsMocks = [
+                {
+                    id: 1,
+                    name: "Camilo",
+                    position: "Del",
+                    added: false,
+                    eFisico: "Bueno",
+                    pieDer: 3,
+                    pieIzq:2,
+                    img: "https://react.semantic-ui.com/images/avatar/large/matthew.png",
+                },
+                ]
+            );
+ 
+            res.status(201).json({
+                data: deletedFriendId,
+                message:'deleted friend'
+            })
+        } catch (error) {
+            next(error);
+        }
+    });// devuelve un amigo al que le hemos enviado la solicitud de amistad
 }
 
 module.exports = usersApi;
