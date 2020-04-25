@@ -1,4 +1,4 @@
-const friendsMocks = [
+const friendsMock = [
     {
         id: 1,
         name: "Camilo",
@@ -186,6 +186,6 @@ const friendsMocks = [
     }
 ];
 
-module.exports = {
-    usersMocks
-}
+module.exports = {friendsMock}
+
+    
