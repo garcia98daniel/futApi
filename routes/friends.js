@@ -1,6 +1,7 @@
 const express = require('express');
 const FriendsService = require('../services/friends');
-
+//los routes solo se encargan de redireccionar y pasarle la data a los services para que ellos hagan sus operaciones y la devuelvan
+//los routes no llevan logica
 function friendsApi(app){
     const router = express.Router();
     app.use("/api/friends", router);

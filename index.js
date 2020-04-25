@@ -4,6 +4,9 @@ const app = express();
 const { config } = require('./config/index');
 const friendsApi = require('./routes/friends.js');
 
+// middleWare BODY PARSER
+app.use(express.json());
+
 friendsApi(app);
 
 
