@@ -38,7 +38,7 @@ class FriendsService {
 
     async updateFriend({ friendId, friend } = {}){ //no lo usamos aqui
         // const sentFriendRequestId = await Promise.resolve(friendsMock[0].id); //EJEMPLO MOCK
-        const updateFriendId = await this.mongoDB.update(this.collection, friend);
+        const updateFriendId = await this.mongoDB.update(this.collection, friendId, friend);
         return updateFriendId;
     }
 
