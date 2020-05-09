@@ -20,7 +20,7 @@ function friendsApi(app){
         } catch (error) {
             next(error);
         }
-    });// devuelve la lista de los amigos agregados
+    });// devuelve la lista amigos agregados
 
     router.get('/:friendId', async function(req, res, next){
         const { friendId } = req.params;
@@ -34,7 +34,7 @@ function friendsApi(app){
         } catch (error) {
             next(error);
         }
-    });// devuelve un amigo buscado para agregarlo
+    });// devuelve un jugador buscado para agregarlo
 
     router.post('/', async function(req, res, next){
         const { body: friend } = req;
@@ -48,7 +48,7 @@ function friendsApi(app){
         } catch (error) {
             next(error);
         }
-    });// devuelve un amigo al que le hemos enviado la solicitud de amistad
+    });// devuelve un jugador al que le hemos enviado la solicitud de amistad
 
     router.delete('/:friendId', async function(req, res, next){
         const { friendId } = req.params;
@@ -63,7 +63,7 @@ function friendsApi(app){
         } catch (error) {
             next(error);
         }
-    });// devuelve un amigo al que le hemos enviado la solicitud de amistad
+    });// devuelve un amigo al que hemos eliminado
 
     router.put('/:friendId', async function(req, res, next){
         const { friendId } = req.params;
@@ -77,7 +77,7 @@ function friendsApi(app){
         } catch (error) {
             next(error);
         }
-    });// devuelve un amigo al que le hemos enviado la solicitud de amistad
+    });// devuelve a un amigo modificado
 }
 
 module.exports = friendsApi;
