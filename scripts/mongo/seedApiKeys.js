@@ -1,4 +1,6 @@
 // DEBUG=app:* node scripts/mongo/seedApiKeys.js
+// sin dubug si te da problemas node scripts/mongo/seedApiKeys.js
+
 
 const chalk = require('chalk');
 const crypto = require('crypto');

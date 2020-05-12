@@ -4,12 +4,13 @@ const app = express();
 const { config } = require('./config/index');
 const friendsApi = require('./routes/friends.js');
 const userMatchesApi = require('./routes/userMatches.js');
-
+const authApi = require('./routes/auth');
 
 
 // middleWare BODY PARSER
 app.use(express.json());
 
+authApi(app);
 friendsApi(app);
 userMatchesApi(app);
 

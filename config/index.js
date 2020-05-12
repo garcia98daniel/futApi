@@ -8,10 +8,11 @@ const config = {
 	dbPassword: process.env.DB_PASSWORD,
 	dbHost: process.env.DB_HOST,
 	dbName: process.env.DB_NAME,
-	default_admin_password:process.env.DEFAULT_ADMIN_PASSWORD,
-	default_user_password:process.env.DEFAULT_USER_PASSWORD,
-	public_api_key_token: process.env.PUBLIC_API_KEY_TOKEN,
-	admin_api_key_token:process.env.ADMIN_API_KEY_TOKEN
+	authJwtSecret: process.env.AUTH_JWT_SECRET,
+	defaultAdminPassword: process.env.DEFAULT_ADMIN_PASSWORD,
+	defaultUserPassword: process.env.DEFAULT_USER_PASSWORD,
+	publicApiKeyToken: process.env.PUBLIC_API_KEY_TOKEN,
+	adminApiKeyToken: process.env.ADMIN_API_KEY_TOKEN
 }
 
 module.exports = { config };
