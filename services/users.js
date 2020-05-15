@@ -21,6 +21,8 @@ class UsersService {
             email,
             password: hashedPassword
         });
+
+        return createUserId;
     }
 }
 

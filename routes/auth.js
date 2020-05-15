@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const ApiKeysService = require('../services/apiKeys');
 const UsersService = require('../services/users');
 
+const { createUserSchema } = require('../utils/schemas/users');
+
 const { config } = require('../config');
 
 // Basic strategy
@@ -51,7 +53,7 @@ function authApi(app) {
           };
 
           const token = jwt.sign(payload, config.authJwtSecret, {
-            expiresIn: '15m'
+            expiresIn: '50m'
           });
 
           return res.status(200).json({ token, user: { id, name, email } });
@@ -62,64 +64,64 @@ function authApi(app) {
     })(req, res, next);
   });
 
-//   router.post('/sign-up', validationHandler(createUserSchema), async function(
-//     req,
-//     res,
-//     next
-//   ) {
-//     const { body: user } = req;
+  router.post('/sign-up', /*validationHandler(createUserSchema),*/ async function(
+    req,
+    res,
+    next
+  ) {
+    const { body: user } = req;
 
-//     try {
-//       const createdUserId = await usersService.createUser({ user });
+    try {
+      const createdUserId = await usersService.createUser({ user });
 
-//       res.status(201).json({
-//         data: createdUserId,
-//         message: 'user created'
-//       });
-//     } catch (error) {
-//       next(error);
-//     }
-//   });
+      res.status(201).json({
+        data: createdUserId,
+        message: 'user created'
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
 
-//   router.post(
-//     '/sign-provider',
-//     validationHandler(createProviderUserSchema),
-//     async function(req, res, next) {
-//       const { body } = req;
+  // router.post(
+  //   '/sign-provider',
+  //   /*validationHandler(createProviderUserSchema)*/,
+  //   async function(req, res, next) {
+  //     const { body } = req;
 
-//       const { apiKeyToken, ...user } = body;
+  //     const { apiKeyToken, ...user } = body;
 
-//       if (!apiKeyToken) {
-//         next(boom.unauthorized('apiKeyToken is required'));
-//       }
+  //     if (!apiKeyToken) {
+  //       next(boom.unauthorized('apiKeyToken is required'));
+  //     }
 
-//       try {
-//         const queriedUser = await usersService.getOrCreateUser({ user });
-//         const apiKey = await apiKeysService.getApiKey({ token: apiKeyToken });
+  //     try {
+  //       const queriedUser = await usersService.getOrCreateUser({ user });
+  //       const apiKey = await apiKeysService.getApiKey({ token: apiKeyToken });
 
-//         if (!apiKey) {
-//           next(boom.unauthorized());
-//         }
+  //       if (!apiKey) {
+  //         next(boom.unauthorized());
+  //       }
 
-//         const { _id: id, name, email } = queriedUser;
+  //       const { _id: id, name, email } = queriedUser;
 
-//         const payload = {
-//           sub: id,
-//           name,
-//           email,
-//           scopes: apiKey.scopes
-//         };
+  //       const payload = {
+  //         sub: id,
+  //         name,
+  //         email,
+  //         scopes: apiKey.scopes
+  //       };
 
-//         const token = jwt.sign(payload, config.authJwtSecret, {
-//           expiresIn: '15m'
-//         });
+  //       const token = jwt.sign(payload, config.authJwtSecret, {
+  //         expiresIn: '15m'
+  //       });
 
-//         return res.status(200).json({ token, user: { id, name, email } });
-//       } catch (error) {
-//         next(error);
-//       }
-//     }
-//   );
+  //       return res.status(200).json({ token, user: { id, name, email } });
+  //     } catch (error) {
+  //       next(error);
+  //     }
+  //   }
+  // );
 }
 
 module.exports = authApi;

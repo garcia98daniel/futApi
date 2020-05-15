@@ -19,7 +19,7 @@ passport.use(
             const user = await usersService.getUser({ email: tokenPayload.email});
 
             if(!user){//si no existe el usuario
-                return cb(boom.unauthorized('firma'), false);//devolvemos un no autoriado
+                return cb(boom.unauthorized(), false);//devolvemos un no autoriado
             }
 
             delete user.password;// borramos la contraseña en el objeto del usuario por seguridad

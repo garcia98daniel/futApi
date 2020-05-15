@@ -4,6 +4,10 @@ const UsersMatchesService = require('../services/userMatches');
 //los routes solo se encargan de redireccionar y pasarle la data a los services para que ellos hagan sus operaciones y la devuelvan
 //los routes no llevan logica
 
+//protegiendo las rutas con jwt
+const passport = require('passport');
+require('../utils/auth/strategies/jwt');
+
 // const { friendIdSchema } = require('../utils/schemas/friendSchema');
 const { userIdSchema } = require('../utils/schemas/users');
 const { createUserMatchSchema } = require('../utils/schemas/userMatches')
@@ -14,7 +18,7 @@ function userMatchesApi(app){
 
     const userMatchesService = new UsersMatchesService();
 
-    router.get('/', async function(req, res, next){
+    router.get('/',passport.authenticate(/*estrategia*/'jwt',{session:false}), async function(req, res, next){
         const { userId } = req.query
 
         try{
@@ -33,7 +37,7 @@ function userMatchesApi(app){
         
     });// devuelve la info de un partido 
 
-    router.post('/', async function(req, res, next){
+    router.post('/',passport.authenticate(/*estrategia*/'jwt',{session:false}), async function(req, res, next){
         const { body: userMatch } = req;
 
         try{
@@ -49,7 +53,7 @@ function userMatchesApi(app){
  
     });// devuelve un el id del partido que acabamos de crear
 
-    router.delete('/:userMatchId', async function(req, res, next){
+    router.delete('/:userMatchId',passport.authenticate(/*estrategia*/'jwt',{session:false}), async function(req, res, next){
         const { userMatchId } = req.params;
 
         try{
@@ -64,7 +68,7 @@ function userMatchesApi(app){
         }
     });// devuelve un id del partido eliminado
 
-    router.put('/:matchId', async function(req, res, next){
+    router.put('/:matchId',passport.authenticate(/*estrategia*/'jwt',{session:false}), async function(req, res, next){
        
     });// devuelve a un id del partido modificado
 }
