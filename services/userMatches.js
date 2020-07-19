@@ -13,6 +13,12 @@ class UsersMatchesService {
         return userMatches || [];
     }
 
+    async getUserMatche({ userId }){
+        // const friend = await Promise.resolve(friendsMock[0]); //EJEMPLO MOCK
+        const userMatch = await this.mongoDB.get(this.collection, userId);
+        return userMatch || {};
+    }
+
     async createUserMatch({ userMatch }){
         const createdUserMatchId  = await this.mongoDB.create(this.collection,  userMatch );
 

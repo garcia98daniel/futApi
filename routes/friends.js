@@ -72,7 +72,7 @@ function friendsApi(app){
 
     router.put('/:friendId',passport.authenticate(/*estrategia*/'jwt',{session:false}), async function(req, res, next){
         const { friendId } = req.params;
-        const { body: friend} = req
+        const { body: friend} = req;
         try {
             const updatedFriendId = await friendsService.updateFriend({ friendId, friend });
             res.status(200).json({
