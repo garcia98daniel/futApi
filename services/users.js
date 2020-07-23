@@ -12,6 +12,13 @@ class UsersService {
         return user;
     }
 
+    async getUserWithOutPassword({ id }){
+        const [ user ] = await this.mongoDB.get(this.collection, { id });
+        user.password = '';
+        return user;
+    }
+
+
     async updateUser({ userId, user } = {}){ 
         // const sentFriendRequestId = await Promise.resolve(friendsMock[0].id); //EJEMPLO MOCK
         const updateUserId = await this.mongoDB.update(this.collection, userId, user);
@@ -19,7 +26,7 @@ class UsersService {
     }   
 
     async createUser({ user }){
-        const { name, email, password, lastName, nationality, gender, born, residence_city } = user ;
+        const { name, email, password, lastName, nationality, gender, born, residence_city,fisic, rightFoot, leftFoot, img } = user ;
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const createUserId = await this.mongoDB.create(this.collection, {
@@ -30,7 +37,11 @@ class UsersService {
             gender, 
             born, 
             residence_city,
-            password: hashedPassword
+            password: hashedPassword,
+            fisic,
+			rightFoot,
+			leftFoot,
+			img
         });
 
         return createUserId;

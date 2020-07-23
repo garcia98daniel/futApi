@@ -43,21 +43,53 @@ function authApi(app) {
             next(boom.unauthorized());
           }
 
-          const { _id: id, name, email } = user;
+          const { 
+            _id: id, 
+            name, 
+            email,
+            lastName,
+            nationality,
+            gender,
+            born,	
+            residence_city,
+            password,
+            fisic,
+            rightFoot,
+            leftFoot,
+            img, } = user; //extrayendo de user
 
           const payload = {
             sub: id,
             name,
             email,
+            lastName,
+            nationality,
+            gender,
+            born,	
+            residence_city,
+            password,
+            fisic,
+            rightFoot,
+            leftFoot,
+            img,
             scopes: apiKey.scopes
           };
 
-          const token = jwt.sign(payload, config.authJwtSecret, {
+          const token = jwt.sign(payload, config.authJwtSecret, { //firmando token (emcribtando)
             expiresIn: '50m'
           });
 
-          return res.status(200).json({ token, user: { id, name, email } });
-        });
+          return res.status(200).json({ token, user: { id, name, email, lastName,
+                                                                        nationality,
+                                                                        gender,
+                                                                        born,	
+                                                                        residence_city,
+                                                                        password,
+                                                                        fisic,
+                                                                        rightFoot,
+                                                                        leftFoot,
+                                                                        img, } });
+          });
       } catch (error) {
         next(error);
       }

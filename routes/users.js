@@ -18,9 +18,33 @@ function usersApi(app){
 
     const usersService = new UsersService();
 
-    // router.get('/',passport.authenticate(/*estrategia*/'jwt',{session:false}), async function(req, res, next){
-        
-    // });
+    router.get('/:email',/*passport.authenticate('jwt',{session:false}),*/ async function(req, res, next){
+        const { email } = req.params;
+        try {
+            const user = await usersService.getUser({ email });
+ 
+            res.status(200).json({
+                data: user,
+                message:'user retrieved'
+            })
+        } catch (error) {
+            next(error);
+        }
+    });// devuelve un usuario
+
+    router.get('/wp/:id',/*passport.authenticate('jwt',{session:false}),*/ async function(req, res, next){
+        const { id } = req.params;
+        try {
+            const user = await usersService.getUserWithOutPassword({ id });
+ 
+            res.status(200).json({
+                data: user,
+                message:'user retrieved'
+            })
+        } catch (error) {
+            next(error);
+        }
+    });// devuelve un usuario sin contraseña
     
     router.put('/:userId',/*passport.authenticate('jwt',{session:false}),*/ async function(req, res, next){
         const { userId } = req.params;
