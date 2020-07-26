@@ -12,10 +12,10 @@ class UsersService {
         return user;
     }
 
-    async getUserWithOutPassword({ id }){
-        const [ user ] = await this.mongoDB.get(this.collection, { id });
-        user.password = '';
-        return user;
+    async getUserWithOutPassword({ userId }){
+        const user = await this.mongoDB.get(this.collection, userId);
+        delete user.password;
+        return user || {};
     }
 
 
@@ -26,7 +26,7 @@ class UsersService {
     }   
 
     async createUser({ user }){
-        const { name, email, password, lastName, nationality, gender, born, residence_city,fisic, rightFoot, leftFoot, img } = user ;
+        const { name, email, password, lastName, nationality, gender, born, residence_city,fisic, position, rightFoot, leftFoot, img } = user ;
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const createUserId = await this.mongoDB.create(this.collection, {
@@ -39,6 +39,7 @@ class UsersService {
             residence_city,
             password: hashedPassword,
             fisic,
+            position,
 			rightFoot,
 			leftFoot,
 			img

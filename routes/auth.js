@@ -45,33 +45,34 @@ function authApi(app) {
 
           const { 
             _id: id, 
-            name, 
+            // name, 
             email,
-            lastName,
-            nationality,
-            gender,
-            born,	
-            residence_city,
-            password,
-            fisic,
-            rightFoot,
-            leftFoot,
-            img, } = user; //extrayendo de user
+            // lastName,
+            // nationality,
+            // gender,
+            // born,	
+            // residence_city,
+            // password,
+            // fisic,
+            // rightFoot,
+            // leftFoot,
+            // img, 
+          } = user; //extrayendo de user
 
           const payload = {
             sub: id,
-            name,
+            // name,
             email,
-            lastName,
-            nationality,
-            gender,
-            born,	
-            residence_city,
-            password,
-            fisic,
-            rightFoot,
-            leftFoot,
-            img,
+            // lastName,
+            // nationality,
+            // gender,
+            // born,	
+            // residence_city,
+            // password,
+            // fisic,
+            // rightFoot,
+            // leftFoot,
+            // img,
             scopes: apiKey.scopes
           };
 
@@ -79,16 +80,20 @@ function authApi(app) {
             expiresIn: '50m'
           });
 
-          return res.status(200).json({ token, user: { id, name, email, lastName,
-                                                                        nationality,
-                                                                        gender,
-                                                                        born,	
-                                                                        residence_city,
-                                                                        password,
-                                                                        fisic,
-                                                                        rightFoot,
-                                                                        leftFoot,
-                                                                        img, } });
+          return res.status(200).json({ token, user: { id,
+                                                      // name,
+                                                      email,
+                                                      // lastName,
+                                                      // nationality,
+                                                      // gender,
+                                                      // born,	
+                                                      // residence_city,
+                                                      // password,
+                                                      // fisic,
+                                                      // rightFoot,
+                                                      // leftFoot,
+                                                      // img, 
+                                                    } });
           });
       } catch (error) {
         next(error);

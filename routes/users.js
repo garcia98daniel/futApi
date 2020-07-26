@@ -32,10 +32,10 @@ function usersApi(app){
         }
     });// devuelve un usuario
 
-    router.get('/wp/:id',/*passport.authenticate('jwt',{session:false}),*/ async function(req, res, next){
-        const { id } = req.params;
+    router.get('/wp/:userId',/*passport.authenticate('jwt',{session:false}),*/ async function(req, res, next){
+        const { userId } = req.params;
         try {
-            const user = await usersService.getUserWithOutPassword({ id });
+            const user = await usersService.getUserWithOutPassword({ userId });
  
             res.status(200).json({
                 data: user,
