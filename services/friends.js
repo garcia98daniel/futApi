@@ -1,6 +1,8 @@
 // const { friendsMock } = require("../utils/mocks/friends"); //el nombre de la variable debe coinsidir con la variable exportada
 
 const MongoLib = require("../lib/mongo");
+
+const { query } = require("express");
 // aqui va la toda la logica del software
 // los services se encargan de recibir la informacion de las rutas y peticiones 
 class FriendsService {

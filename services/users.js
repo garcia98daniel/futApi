@@ -18,7 +18,6 @@ class UsersService {
         return user || {};
     }
 
-
     async updateUser({ userId, user } = {}){ 
         // const sentFriendRequestId = await Promise.resolve(friendsMock[0].id); //EJEMPLO MOCK
         const updateUserId = await this.mongoDB.update(this.collection, userId, user);
